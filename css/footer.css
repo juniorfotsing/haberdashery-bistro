@@ -1,0 +1,66 @@
+/* =========================================
+   FOOTER — dark, four-column sitemap
+   ========================================= */
+
+.site-footer{
+  background: var(--ink); color: rgba(246,241,232,.7);
+  padding: 5rem 0 2rem;
+  font-size: .9rem;
+}
+
+.foot-grid{
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 3rem; margin-bottom: 3.5rem;
+}
+
+.foot-grid h4{
+  color: var(--cream); font-family: var(--sans);
+  font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.foot-grid a{
+  color: rgba(246,241,232,.6);
+  text-decoration: none;
+  display: block;
+  padding: .3rem 0;
+  transition: color .15s var(--ease);
+}
+.foot-grid a:hover{ color: var(--brass); }
+
+.foot-brand .brand{
+  color: var(--cream); font-size: 1.5rem; font-style: italic;
+}
+.foot-brand p{ margin: 1rem 0 0; max-width: 320px; }
+
+.socials{ display: flex; gap: .65rem; margin-top: 1.75rem; }
+.socials a{
+  display: inline-grid; place-items: center;
+  width: 38px; height: 38px; padding: 0;
+  border: 1px solid rgba(246,241,232,.2);
+  border-radius: 50%;
+  transition: all .2s var(--ease);
+}
+.socials a:hover{
+  background: var(--brass); border-color: var(--brass); color: var(--ink);
+}
+.socials svg{ width: 14px; height: 14px; }
+
+.foot-bottom{
+  border-top: 1px solid rgba(246,241,232,.1);
+  padding-top: 1.75rem;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  font-size: .78rem;
+  color: rgba(246,241,232,.45);
+  letter-spacing: .04em;
+}
+.foot-bottom .button-mark{ vertical-align: -2px; margin-inline: .35rem; }
+
+.foot-divider{ opacity: .2; margin-bottom: 1.75rem; }
+
+@media (max-width: 880px){
+  .foot-grid{ grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .foot-brand{ grid-column: 1 / -1; }
+}

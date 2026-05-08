@@ -1,0 +1,81 @@
+/* =========================================
+   UTILITIES — shared bits used across sections
+   eyebrow · button-mark · stitch · section-head · reveal
+   ========================================= */
+
+/* "Stitched" dashed line */
+.stitch{
+  height: 1px;
+  background-image: linear-gradient(to right, var(--line-2) 50%, transparent 50%);
+  background-size: 12px 1px;
+  background-repeat: repeat-x;
+  border: 0;
+}
+.stitch-soft{ background-image: linear-gradient(to right, var(--line) 50%, transparent 50%); }
+
+/* Eyebrow label */
+.eyebrow{
+  display: inline-flex; align-items: center; gap: .65rem;
+  font-family: var(--sans);
+  font-size: .72rem; letter-spacing: .28em; text-transform: uppercase;
+  font-weight: 500; color: var(--brass-deep);
+  margin: 0;
+}
+.eyebrow::before{ content:""; width: 28px; height: 1px; background: currentColor; }
+.eyebrow.center{ display: flex; justify-content: center; }
+.eyebrow.center::before{ display: none; }
+
+/* The button motif — CSS-only thread-hole button */
+.button-mark{
+  display: inline-block; vertical-align: middle;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--brass);
+  box-shadow: inset 0 0 0 1.5px var(--brass-deep);
+  position: relative;
+  flex: none;
+}
+.button-mark::before{
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 35% 40%, var(--brass-deep) 0 1.2px, transparent 1.6px),
+    radial-gradient(circle at 65% 40%, var(--brass-deep) 0 1.2px, transparent 1.6px),
+    radial-gradient(circle at 35% 65%, var(--brass-deep) 0 1.2px, transparent 1.6px),
+    radial-gradient(circle at 65% 65%, var(--brass-deep) 0 1.2px, transparent 1.6px);
+}
+
+/* Section head — eyebrow + title + optional link, used by menu, spaces, visit */
+.section-head{
+  display: grid; grid-template-columns: auto 1fr auto; gap: 2rem;
+  align-items: end; margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.section-head .head-text h2{
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-style: italic; font-weight: 400;
+  margin-top: 1rem;
+}
+.section-head .head-text h2 em{ font-style: normal; color: var(--wine); }
+.section-head .head-link{
+  font-size: .78rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+  border-bottom: 1px solid var(--line-2);
+  padding-bottom: .35rem;
+  transition: color .15s var(--ease), border-color .15s var(--ease);
+  white-space: nowrap;
+}
+.section-head .head-link:hover{ color: var(--wine); border-color: var(--wine); }
+
+@media (max-width: 880px){
+  .section-head{ grid-template-columns: 1fr; gap: 1rem; }
+}
+
+/* Reveal-on-scroll */
+.reveal{
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .9s var(--ease), transform .9s var(--ease);
+}
+.reveal.visible{ opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity: 1; transform: none; transition: none; }
+  html{ scroll-behavior: auto; }
+}

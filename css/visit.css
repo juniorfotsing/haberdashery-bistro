@@ -1,0 +1,95 @@
+/* =========================================
+   VISIT — opening hours panel + find-us panel
+   ========================================= */
+
+.visit{ padding: clamp(5rem, 10vw, 8rem) 0; }
+
+.visit-grid{
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.panel{
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+}
+.panel h3{
+  font-size: 1.6rem; font-style: italic; font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+/* Hours list — today highlighted */
+.hours-list{ list-style: none; padding: 0; margin: 0; }
+.hours-list li{
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: .85rem 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: .96rem;
+  transition: color .2s var(--ease);
+}
+.hours-list li:last-child{ border-bottom: 0; }
+.hours-list .day{
+  color: var(--ink-soft); font-weight: 500;
+  font-family: var(--serif); font-style: italic;
+  font-size: 1.05rem;
+}
+.hours-list .time{
+  color: var(--muted);
+  font-variant-numeric: tabular-nums oldstyle-nums;
+}
+.hours-list li.today{
+  background: color-mix(in srgb, var(--wine) 6%, transparent);
+  margin: 0 -1rem;
+  padding-inline: 1rem;
+}
+.hours-list li.today .day,
+.hours-list li.today .time{ color: var(--wine); font-weight: 600; }
+.hours-list li.today::after{
+  content: "TODAY";
+  position: absolute;
+  font-size: .58rem; letter-spacing: .25em;
+  color: var(--wine);
+  transform: translateY(-2px);
+  margin-left: .65rem;
+}
+
+/* Find-us lines */
+.visit-line{
+  display: flex; gap: 1rem; padding: 1rem 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: .96rem;
+  align-items: flex-start;
+}
+.visit-line:last-child{ border-bottom: 0; }
+.visit-line .ic{
+  flex: none; width: 32px; height: 32px;
+  display: grid; place-items: center;
+  background: color-mix(in srgb, var(--wine) 8%, transparent);
+  border-radius: 50%;
+  color: var(--wine);
+}
+.visit-line .ic svg{ width: 14px; height: 14px; }
+.visit-line a, .visit-line span{
+  color: var(--ink-soft); text-decoration: none; line-height: 1.45;
+}
+.visit-line a:hover{ color: var(--wine); }
+.visit-line strong{
+  display: block; font-family: var(--sans); font-weight: 500;
+  font-size: .68rem; letter-spacing: .25em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: .15rem;
+}
+
+.visit-note{
+  margin-top: 1.5rem;
+  font-size: .82rem;
+  color: var(--muted);
+  font-style: italic;
+  font-family: var(--serif);
+}
+
+@media (max-width: 880px){
+  .visit-grid{ grid-template-columns: 1fr; }
+  .panel{ padding: 1.85rem; }
+}

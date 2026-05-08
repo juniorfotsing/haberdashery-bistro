@@ -1,0 +1,74 @@
+/* =========================================
+   STORY — image with badge + text with dropcap + pullquote
+   ========================================= */
+
+.story{ padding: clamp(5rem, 10vw, 8rem) 0; }
+
+.story-grid{
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.story-img{
+  aspect-ratio: 4/5;
+  background:
+    linear-gradient(180deg, rgba(26,26,23,0) 60%, rgba(26,26,23,.2) 100%),
+    url("../images/real-food.avif") center/cover no-repeat;
+  position: relative;
+  border-radius: var(--radius);
+}
+.story-img .badge{
+  position: absolute; bottom: -1.25rem; right: -1.25rem;
+  background: var(--paper); color: var(--wine);
+  border: 1px solid var(--line);
+  padding: 1.1rem 1.25rem;
+  font-family: var(--serif); font-style: italic;
+  text-align: center;
+}
+.story-img .badge strong{
+  display: block; font-size: 2.2rem; font-style: italic; font-weight: 400;
+  line-height: 1; color: var(--wine);
+  font-variant-numeric: oldstyle-nums;
+}
+.story-img .badge small{
+  display: block; font-family: var(--sans); font-style: normal;
+  font-size: .62rem; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--muted); margin-top: .35rem;
+}
+
+.story h2{
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-style: italic; font-weight: 400;
+  margin: 1.5rem 0;
+}
+.story h2 em{ font-style: normal; color: var(--wine); }
+.story p{ color: var(--ink-soft); margin: 0 0 1.1rem; }
+
+.dropcap::first-letter{
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: 4.5em; line-height: .85;
+  float: left; padding: .15em .15em 0 0;
+  color: var(--wine);
+}
+
+.pullquote{
+  font-family: var(--serif); font-style: italic;
+  font-size: 1.15rem;
+  color: var(--muted);
+  margin-top: 2rem; padding-top: 2rem;
+  border-top: 1px dashed var(--line-2);
+}
+.pullquote cite{
+  display: block; margin-top: .65rem;
+  font-family: var(--sans); font-style: normal;
+  font-size: .72rem; letter-spacing: .25em; text-transform: uppercase;
+  color: var(--ink); font-weight: 500;
+}
+
+@media (max-width: 880px){
+  .story-grid{ grid-template-columns: 1fr; }
+  .story-img{ aspect-ratio: 4/3; max-width: 520px; margin: 0 auto; }
+  .story-img .badge{ right: 1rem; }
+}

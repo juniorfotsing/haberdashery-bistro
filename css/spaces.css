@@ -1,0 +1,88 @@
+/* =========================================
+   SPACES — private dining rooms + catering bar
+   ========================================= */
+
+.spaces{ padding: clamp(5rem, 10vw, 8rem) 0; }
+
+.space-grid{
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.5rem; margin-bottom: 1.5rem;
+}
+
+.space-card{
+  position: relative; overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-2);
+  padding: 2.75rem 2.5rem 2.5rem;
+  transition: transform .4s var(--ease), background .4s var(--ease);
+  display: flex; flex-direction: column;
+  min-height: 380px;
+}
+.space-card:hover{
+  transform: translateY(-3px);
+  background: var(--paper);
+}
+
+.space-card .room-no{
+  position: absolute; top: 1.5rem; right: 1.75rem;
+  font-family: var(--serif); font-style: italic;
+  color: var(--brass-deep); font-size: .82rem;
+  letter-spacing: .08em;
+  font-variant-numeric: oldstyle-nums;
+}
+
+.space-card .kicker{
+  font-size: .68rem; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--brass-deep);
+  display: flex; align-items: center; gap: .65rem;
+  margin-bottom: 1.25rem;
+}
+
+.space-card h3{
+  font-size: 2.1rem; font-style: italic; font-weight: 400;
+  margin-bottom: 1rem; line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.space-card p{
+  color: var(--muted); margin: 0 0 auto;
+  font-size: .94rem; max-width: 36ch;
+}
+
+.space-card .cap{
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--line-2);
+  display: flex; align-items: baseline; gap: .8rem;
+}
+.space-card .cap-big{
+  font-family: var(--serif); font-style: italic;
+  font-variant-numeric: oldstyle-nums;
+  color: var(--wine);
+  font-size: 2.2rem; line-height: 1;
+}
+.space-card .cap-label{
+  font-size: .7rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Catering bar — dark sub-section under the spaces grid */
+.catering-bar{
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 2rem; align-items: center;
+  padding: 2rem 2.25rem;
+  background: var(--ink); color: var(--cream);
+  border-radius: var(--radius);
+}
+.catering-bar h3{
+  font-style: italic; font-weight: 400;
+  font-size: 1.5rem; color: var(--cream);
+  margin-bottom: .35rem;
+}
+.catering-bar p{ margin: 0; color: rgba(246,241,232,.7); font-size: .92rem; }
+
+@media (max-width: 880px){
+  .space-grid{ grid-template-columns: 1fr; }
+  .catering-bar{ grid-template-columns: 1fr; gap: 1.5rem; }
+}
