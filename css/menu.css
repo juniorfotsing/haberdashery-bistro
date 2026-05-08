@@ -111,6 +111,156 @@
   font-family: var(--serif); font-size: .98rem;
 }
 
+/* ========== Text version (collapsible) ========== */
+.menu-text{
+  margin-top: 1rem;
+  border-top: 1px dashed var(--line);
+}
+.menu-text > summary{
+  list-style: none;
+  cursor: pointer;
+  padding: 1.1rem .25rem;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .76rem; letter-spacing: .14em; text-transform: uppercase;
+  font-weight: 500; color: var(--ink-soft);
+  transition: color .15s var(--ease);
+  user-select: none;
+}
+.menu-text > summary::-webkit-details-marker{ display: none; }
+.menu-text > summary::marker{ display: none; content: ""; }
+.menu-text > summary:hover{ color: var(--wine); }
+
+.menu-text-mark{
+  width: 26px; height: 26px;
+  display: grid; place-items: center;
+  font-size: 1.1rem; font-weight: 400; line-height: 1;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  color: var(--ink-soft);
+  transition: transform .25s var(--ease), background .15s var(--ease), color .15s var(--ease), border-color .15s var(--ease);
+}
+.menu-text[open] .menu-text-mark{
+  transform: rotate(45deg);
+  background: var(--wine);
+  color: var(--cream);
+  border-color: var(--wine);
+}
+
+.menu-text-body{
+  padding: .5rem .25rem 1.5rem;
+}
+
+.menu-text-body h4{
+  font-family: var(--sans);
+  font-size: .68rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--brass-deep);
+  margin: 2rem 0 1.1rem;
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: .65rem;
+}
+.menu-text-body h4:first-of-type{ margin-top: .5rem; }
+.menu-text-body h4 .size-key{
+  font-family: var(--serif);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: .02em;
+  color: var(--muted);
+  font-size: .82rem;
+  font-weight: 400;
+}
+
+.menu-text-body dl{
+  margin: 0;
+  display: grid;
+  gap: 1.1rem;
+}
+.menu-text-body dt{
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: .75rem;
+  align-items: baseline;
+  font-family: var(--serif);
+}
+.menu-text-body dt .dish{
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: .005em;
+}
+.menu-text-body dt .dish small{
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: .68rem;
+  color: var(--muted);
+  letter-spacing: .04em;
+  margin-left: .35rem;
+}
+.menu-text-body dt .tags{
+  font-family: var(--sans);
+  font-size: .58rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--brass-deep);
+  white-space: nowrap;
+}
+.menu-text-body dt .tags:empty{ display: none; }
+.menu-text-body dt .price,
+.menu-text-body dt .prices{
+  font-family: var(--serif);
+  color: var(--wine);
+  font-variant-numeric: tabular-nums oldstyle-nums;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+.menu-text-body dd{
+  margin: .25rem 0 0;
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.55;
+}
+
+/* Wine/beer rows: name + prices, no description */
+.menu-text-body .wine-list dt{
+  grid-template-columns: 1fr auto;
+  padding: .5rem 0;
+  border-bottom: 1px dashed var(--line);
+}
+.menu-text-body .wine-list dt:last-child{ border-bottom: 0; }
+
+.menu-text-legend{
+  margin: 2rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--line);
+  font-size: .82rem;
+  color: var(--muted);
+  font-style: italic;
+  font-family: var(--serif);
+  line-height: 1.6;
+}
+.menu-text-legend strong{
+  font-family: var(--sans);
+  font-style: normal;
+  font-weight: 500;
+  color: var(--ink-soft);
+  letter-spacing: .12em;
+  font-size: .68rem;
+}
+
+@media (max-width: 600px){
+  .menu-text-body dt{
+    grid-template-columns: 1fr auto;
+  }
+  .menu-text-body dt .tags{
+    grid-column: 1 / -1;
+    font-size: .56rem;
+    margin-top: .15rem;
+  }
+  .menu-text-body dt .dish{ font-size: 1rem; }
+}
+
 @media (max-width: 880px){
   .menu-boards{ grid-template-columns: 1fr; gap: 2.25rem; }
   .menu-board figcaption{
