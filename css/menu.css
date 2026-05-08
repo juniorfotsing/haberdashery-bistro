@@ -1,87 +1,126 @@
 /* =========================================
-   MENU PREVIEW — two columns of dishes with leader-line dots
+   MENU & DRINKS — two framed boards (Volume I / II)
+   Click each to open the full-size image.
    ========================================= */
 
 .menu{ padding: clamp(5rem, 10vw, 8rem) 0; }
 
-.menu-cols{
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 6vw, 5rem);
+.menu-boards{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 4vw, 2.75rem);
 }
 
-.menu-col h4{
-  font-family: var(--sans); font-size: .72rem;
-  letter-spacing: .28em; text-transform: uppercase;
-  color: var(--brass-deep); font-weight: 500;
-  margin-bottom: 2rem;
-  display: flex; align-items: center; gap: .8rem;
-}
-.menu-col h4::before, .menu-col h4::after{
-  content: ""; flex: 1; height: 1px;
-  background-image: linear-gradient(to right, var(--line-2) 50%, transparent 50%);
-  background-size: 6px 1px;
+.menu-board{
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.menu-item{
-  padding: 1rem 0;
-  border-bottom: 1px dashed var(--line);
+.menu-board-frame{
+  position: relative;
+  display: block;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease);
 }
-.menu-item:last-child{ border-bottom: 0; }
-
-.menu-row{
-  display: flex; gap: .75rem; align-items: baseline;
-  margin-bottom: .35rem;
+.menu-board-frame::after{
+  content: ""; position: absolute; inset: 1.25rem;
+  border: 1px solid rgba(26,26,23,.08);
+  pointer-events: none;
+}
+.menu-board-frame:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 28px 60px -32px rgba(26,26,23,.4);
+}
+.menu-board-frame:hover img{
+  transform: scale(1.015);
 }
 
-.menu-num{
-  font-family: var(--serif); font-style: italic;
-  color: var(--brass-deep); font-size: .85rem;
-  min-width: 1.75rem;
-  font-variant-numeric: oldstyle-nums;
+.menu-board-frame img{
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 1px;
+  background: var(--paper);
+  transition: transform .6s var(--ease);
 }
 
-.menu-name{
-  font-family: var(--serif); font-size: 1.18rem;
+/* Hover affordance: small "View full size" pill */
+.menu-board-zoom{
+  position: absolute;
+  top: 1.75rem; right: 1.75rem;
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .55rem .85rem;
+  background: var(--ink); color: var(--cream);
+  border-radius: 999px;
+  font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
   font-weight: 500;
-  color: var(--ink);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .25s var(--ease), transform .25s var(--ease);
+  pointer-events: none;
+}
+.menu-board-zoom svg{ width: 13px; height: 13px; }
+.menu-board-frame:hover .menu-board-zoom,
+.menu-board-frame:focus-visible .menu-board-zoom{
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.menu-dots{
-  flex: 1; transform: translateY(-3px);
-  height: 1px;
-  background-image: radial-gradient(circle, var(--line-2) 1px, transparent 1.5px);
-  background-size: 6px 1px;
-  background-repeat: repeat-x;
+.menu-board figcaption{
+  padding: 1.5rem .35rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
 }
-
-.menu-price{
+.menu-board figcaption .kicker{
+  display: block;
+  font-size: .68rem; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--brass-deep);
+  margin-bottom: .4rem;
+}
+.menu-board figcaption h3{
   font-family: var(--serif);
-  color: var(--wine);
-  font-variant-numeric: tabular-nums oldstyle-nums;
-  font-size: 1.08rem;
+  font-style: italic; font-weight: 400;
+  font-size: 1.6rem;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.01em;
 }
 
-.menu-desc{
-  color: var(--muted); font-size: .9rem;
-  margin: 0; padding-left: 2.5rem;
+.menu-board-link{
+  font-size: .76rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-soft); text-decoration: none;
+  border-bottom: 1px dashed var(--line-2);
+  padding-bottom: .25rem;
+  transition: color .15s var(--ease), border-color .15s var(--ease);
+  white-space: nowrap;
 }
-
-.menu-tag{
-  display: inline-block; margin-left: .5rem;
-  font-family: var(--sans); font-size: .62rem; letter-spacing: .2em;
-  color: var(--forest); text-transform: uppercase;
-  padding: .15rem .45rem;
-  background: color-mix(in srgb, var(--forest) 10%, transparent);
-  vertical-align: 2px;
-}
+.menu-board-link:hover{ color: var(--wine); border-color: var(--wine); }
 
 .menu-foot{
-  margin-top: clamp(3rem, 5vw, 4rem);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
   text-align: center;
   color: var(--muted); font-style: italic;
-  font-family: var(--serif); font-size: .95rem;
+  font-family: var(--serif); font-size: .98rem;
 }
 
 @media (max-width: 880px){
-  .menu-cols{ grid-template-columns: 1fr; gap: 3rem; }
+  .menu-boards{ grid-template-columns: 1fr; gap: 2.25rem; }
+  .menu-board figcaption{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .75rem;
+  }
+  .menu-board-zoom{
+    opacity: 1;
+    transform: none;
+    top: 1.75rem; right: 1.75rem;
+  }
 }
