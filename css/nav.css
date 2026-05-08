@@ -40,36 +40,62 @@
 }
 
 .brand{
-  grid-column: 2;
   display: flex; align-items: center; gap: .65rem;
   font-family: var(--serif); font-style: italic;
   font-size: 1.3rem; font-weight: 500;
   text-decoration: none; color: var(--ink);
   letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+/* Right cluster — links, socials, Reserve, hamburger */
+.nav-actions{
+  display: flex; align-items: center; gap: 1rem;
+  justify-content: flex-end;
 }
 
 .nav-links{
-  display: flex; gap: 1.75rem; align-items: center; justify-content: flex-end;
+  display: flex; gap: 1.75rem; align-items: center;
   font-size: .82rem;
   letter-spacing: .14em;
   text-transform: uppercase;
   font-weight: 500;
 }
-.nav-links a{
+.nav-links > a{
   text-decoration: none; color: var(--ink-soft);
   position: relative;
   padding: .35rem 0;
   transition: color .15s var(--ease);
 }
-.nav-links a:not(.nav-cta)::after{
+.nav-links > a::after{
   content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
   background-image: linear-gradient(to right, var(--wine) 50%, transparent 50%);
   background-size: 6px 1px; background-repeat: repeat-x;
   transform: scaleX(0); transform-origin: left;
   transition: transform .35s var(--ease);
 }
-.nav-links a:not(.nav-cta):hover{ color: var(--wine); }
-.nav-links a:not(.nav-cta):hover::after{ transform: scaleX(1); }
+.nav-links > a:hover{ color: var(--wine); }
+.nav-links > a:hover::after{ transform: scaleX(1); }
+
+/* Socials — sit between text links and Reserve, divided by a thin rule */
+.nav-socials{
+  display: flex; align-items: center; gap: .25rem;
+  padding-left: .65rem;
+  border-left: 1px solid var(--line);
+}
+.nav-socials a{
+  display: inline-grid; place-items: center;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  color: var(--muted);
+  text-decoration: none;
+  transition: background .2s var(--ease), color .2s var(--ease);
+}
+.nav-socials a:hover{
+  background: var(--wine);
+  color: var(--cream);
+}
+.nav-socials svg{ width: 14px; height: 14px; display: block; }
 
 .nav-cta{
   display: inline-flex; align-items: center; gap: .45rem;
@@ -80,6 +106,7 @@
   text-decoration: none;
   box-shadow: 0 2px 0 0 var(--wine-deep);
   transition: background .2s var(--ease), transform .2s var(--ease), box-shadow .2s var(--ease);
+  white-space: nowrap;
 }
 .nav-cta:hover{
   background: var(--wine-deep);
@@ -93,26 +120,88 @@
 
 .nav-toggle{
   display: none; background: none; border: 0;
-  padding: .5rem; cursor: pointer; color: var(--ink);
+  padding: .85rem;
+  cursor: pointer; color: var(--ink);
+  border-radius: 50%;
+  transition: background .15s var(--ease);
 }
-.nav-toggle svg{ width: 22px; height: 22px; }
+.nav-toggle:hover{ background: var(--line); }
+.nav-toggle svg{ width: 22px; height: 22px; display: block; }
+.nav-toggle .icon-close{ display: none; }
+.nav-toggle[aria-expanded="true"] .icon-open{ display: none; }
+.nav-toggle[aria-expanded="true"] .icon-close{ display: block; }
 
+/* ========== MOBILE ========== */
 @media (max-width: 880px){
-  .nav-inner{ grid-template-columns: auto 1fr auto; height: 64px; }
+  .nav-inner{
+    grid-template-columns: auto 1fr auto;
+    height: 64px;
+    gap: .5rem;
+  }
   .nav-status{ display: none; }
-  .brand{ grid-column: 1; font-size: 1.1rem; }
+  .brand{
+    grid-column: 1; justify-self: start;
+    font-size: 1.05rem;
+  }
+  .nav-actions{
+    grid-column: 3; justify-self: end;
+    gap: .4rem;
+  }
 
+  /* Compact Reserve pill stays visible */
+  .nav-cta{
+    padding: .7rem 1.05rem;
+    font-size: .72rem;
+    letter-spacing: .12em;
+  }
+
+  .nav-toggle{ display: inline-flex; }
+
+  /* Slide-down dropdown */
   .nav-links{
     position: fixed; inset: 64px 0 auto 0;
-    flex-direction: column; align-items: flex-start; justify-content: flex-start;
+    flex-direction: column; align-items: stretch;
     background: var(--paper);
-    padding: 2rem var(--pad);
+    padding: .25rem var(--pad) 1.75rem;
     border-bottom: 1px solid var(--line);
-    gap: 1.25rem;
+    box-shadow: 0 30px 60px -40px rgba(26,26,23,.6);
+    gap: 0;
     transform: translateY(-110%);
     transition: transform .3s var(--ease);
     max-height: calc(100vh - 64px); overflow-y: auto;
+    font-size: 1rem;
+    letter-spacing: .12em;
+    visibility: hidden;
   }
-  .nav-links.open{ transform: translateY(0); }
-  .nav-toggle{ display: inline-flex; grid-column: 3; }
+  .nav-links.open{
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .nav-links > a{
+    padding: 1.1rem 0;
+    border-bottom: 1px dashed var(--line);
+    min-height: 48px;
+    display: flex; align-items: center;
+  }
+  .nav-links > a::after{ display: none; }
+
+  .nav-socials{
+    margin-top: 1.5rem;
+    padding: 0;
+    border: 0;
+    gap: .65rem;
+    justify-content: flex-start;
+  }
+  .nav-socials a{
+    width: 48px; height: 48px;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+  .nav-socials svg{ width: 18px; height: 18px; }
+}
+
+@media (max-width: 380px){
+  .brand{ font-size: .95rem; }
+  .nav-cta{ padding: .65rem .9rem; font-size: .68rem; letter-spacing: .1em; }
 }

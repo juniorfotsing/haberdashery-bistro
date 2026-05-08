@@ -11,12 +11,34 @@
   var links  = document.getElementById('navLinks');
   if (!toggle || !links) return;
 
-  toggle.addEventListener('click', function () {
-    var open = links.classList.toggle('open');
+  function setOpen(open) {
+    links.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  toggle.addEventListener('click', function () {
+    setOpen(!links.classList.contains('open'));
   });
 
+  /* Close on link tap */
   links.addEventListener('click', function (e) {
-    if (e.target.tagName === 'A') links.classList.remove('open');
+    if (e.target.closest('a')) setOpen(false);
+  });
+
+  /* Close on Escape */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && links.classList.contains('open')) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  /* Close on outside tap */
+  document.addEventListener('click', function (e) {
+    if (!links.classList.contains('open')) return;
+    if (links.contains(e.target) || toggle.contains(e.target)) return;
+    setOpen(false);
   });
 })();
